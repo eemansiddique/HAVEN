@@ -1,0 +1,92 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  section {
+    @apply py-[75px];
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-full w-[1440px] px-5 mx-auto;
+  }
+  .btn {
+    @apply bg-[#26ABA2] py-[15px] px-[35px] rounded-[50px] text-white font-[600] mt-[38px];
+  }
+  .heading {
+    @apply text-[44px] leading-[54px] font-[700] text-headingColor;
+  }
+  .text_para {
+    @apply text-[18px] leading-[30px] font-[400] text-textColor mt-[18px];
+  }
+
+
+  .hero_section1 {
+    /* @apply bg-gradient-to-r from-[#C6C9E5] via-[#F7DCE5] to-[#F2DFF1] w-full h-screen overflow-hidden */
+    /* @apply bg-[#F9FDFD] w-full h-screen overflow-hidden */
+    /* @apply bg-[url('./assets/images/mask.png')] */
+}
+
+.hero_section {
+  /* Apply background gradient */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff), url('./assets/images/mask.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.signup_session {
+  /* Apply background gradient */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff), url('./assets/images/mask.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.login_session {
+  /* Apply background gradient */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #ffffff), url('./assets/images/mask.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Ensure the content below the mask image is white */
+
+
+
+  .custom-rounded {
+    border-top-left-radius: 30%;
+    border-bottom-right-radius: 30% ;
+  }
+  .custom-rounded1 {
+    border-top-left-radius: 20%  ;
+    border-bottom-right-radius: 20% ;
+  }
+  
+ 
+  
+  .h-96 > div > img {
+    z-index: 1; /* Make sure this is higher than the default z-index */
+  }
+  /* .header{
+    @apply bg-[url('./assets/images/mask.png')]
+  } */
+}
+
+@media only screen and (max-width:1024px) {
+  .container {
+    @apply w-full;
+  }
+  section {
+    @apply py-[35px];
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .heading {
+    @apply text-[26px] leading-[36px];
+  }
+  .text_para {
+    @apply text-[16px] leading-7 mt-4;
+  }
+}
