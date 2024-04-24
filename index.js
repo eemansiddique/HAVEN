@@ -47,6 +47,8 @@ mongoose.connect(dbUrl, {
 
 // Handling CORS preflight requests (OPTIONS)
 app.options('*', cors(corsOptions));
+// app.options('*', cors(corsOptions));
+
 
 // Error handling middleware
 app.use((err, req, res, next) => {
