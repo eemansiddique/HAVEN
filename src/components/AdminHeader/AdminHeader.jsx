@@ -1,27 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';import { NavLink, Link } from 'react-router-dom';
 import { BiMenu } from "react-icons/bi";
 import seedlingIcon from '../../assets/images/seedling-solid.svg';
 import userImg from '../../assets/images/avatar-icon.png';
-import { useDispatch, useSelector } from 'react-redux'; // Import useSelector to access Redux state
-import { logout } from '../../../store/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutAdmin } from '../../../store/adminSlice'; // Import logout action from adminSlice
 
 const navlinks = [
   {
-    path: '/home',
+    path: '/admin/dashboard',
     display: 'Home'
   },
   {
-    path: '/experts',
+    path: '/admin/listExperts',
     display: 'Experts'
   },
   {
-    path: '/community',
-    display: 'Community'
-  },
-  {
-    path: '/shedules',
-    display: 'Shedules'
+    path: '/admin/users',
+    display: 'Users'
   },
   {
     path: '/profile',
@@ -29,12 +25,13 @@ const navlinks = [
   }
 ];
 
-const Header = () => {
-  const user = useSelector(state => state.user.user); // Access user state from Redux
-  const dispatch = useDispatch(); // Redux dispatch function
+const AdminHeader = () => {
+  const admin = useSelector(state => state.admin.admin); // Access admin state from Redux
+  const dispatch = useDispatch();
 
   const headerRef = useRef(null);
   const menuRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleStickyHeader = () => {
     window.addEventListener('scroll', () => {
@@ -56,7 +53,8 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    dispatch(logout()); // Dispatch the logout action
+    dispatch(logoutAdmin()); // Dispatch the logout action from adminSlice
+    navigate('/admin/login');
   };
 
   return (
@@ -84,7 +82,7 @@ const Header = () => {
 
           {/* =======navright=========  */}
           <div className='flex items-center gap-4'>
-            {user ? (
+            {admin ? (
               <button onClick={handleLogout} className='bg-[#26ABA2] py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]'>Logout</button>
             ) : (
               <Link to='/login'>
@@ -101,4 +99,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default AdminHeader;

@@ -6,28 +6,28 @@ import userImg from '../../assets/images/avatar-icon.png';
 import { useDispatch, useSelector } from 'react-redux'; // Import useSelector to access Redux state
 import { logout } from '../../../store/userSlice';
 
-const navlinks = [
-  {
-    path: '/home',
-    display: 'Home'
-  },
-  {
-    path: '/experts',
-    display: 'Experts'
-  },
-  {
-    path: '/community',
-    display: 'Community'
-  },
-  {
-    path: '/shedules',
-    display: 'Shedules'
-  },
-  {
-    path: '/profile',
-    display: 'Profile'
-  }
-];
+// const navlinks = [
+//   {
+//     path: '/home',
+//     display: 'Home'
+//   },
+//   {
+//     path: '/experts',
+//     display: 'Experts'
+//   },
+//   {
+//     path: '/community',
+//     display: 'Community'
+//   },
+//   {
+//     path: '/shedules',
+//     display: 'Shedules'
+//   },
+//   {
+//     path: '/profile',
+//     display: 'Profile'
+//   }
+// ];
 
 const Header = () => {
   const user = useSelector(state => state.user.user); // Access user state from Redux
@@ -60,7 +60,7 @@ const Header = () => {
   };
 
   return (
-    <header className='header flex items-center' ref={headerRef}>
+    <header className='header flex items-center py-3' ref={headerRef}>
       <div className='container px-16'>
         <div className='flex items-center justify-between'>
           {/* =======logo========  */}
@@ -70,7 +70,7 @@ const Header = () => {
           </div>
 
           {/* =======menu=========  */}
-          <div className='navigation' ref={menuRef} onClick={toggleMenu}>
+          {/* <div className='navigation' ref={menuRef} onClick={toggleMenu}>
             <ul className='menu flex items-center gap-[2.7rem]'>
               {navlinks.map((link, index) => (
                 <li key={index}>
@@ -80,10 +80,10 @@ const Header = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* =======navright=========  */}
-          <div className='flex items-center gap-4'>
+          {/* <div className='flex items-center gap-4'>
             {user ? (
               <button onClick={handleLogout} className='bg-[#26ABA2] py-2 px-6 text-white font-[600] h-[44px] flex items-center justify-center rounded-[50px]'>Logout</button>
             ) : (
@@ -94,7 +94,7 @@ const Header = () => {
             <span className='md:hidden' onClick={toggleMenu}>
               <BiMenu className="w-6 h-6 cursor-pointer" />
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
     </header>

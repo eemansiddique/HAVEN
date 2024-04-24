@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import testImg from '../assets/images/testImg.png'
- import  mask from '../assets/images/mask.png'
+import testImg from '../../assets/images/testImg.png'
+ import  mask from '../../assets/images/mask.png'
 
 const Home = () => {
   return (

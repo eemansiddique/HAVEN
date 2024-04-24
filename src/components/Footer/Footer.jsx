@@ -34,7 +34,7 @@ const Footer = () => {
                   <a href="https://rayoflightthemes.com/wordpress-themes/talking-minds-wordpress-theme/about/" className="text-white hover:text-cyan-300">About</a>
                 </li>
                 <li className="mr-6">
-                  <a href="https://rayoflightthemes.com/wordpress-themes/talking-minds-wordpress-theme/clinic-contacts/" className="text-white hover:text-cyan-300">Contact</a>
+                  <a href="https://rayoflightthemes.com/wordpress-themes/talking-minds-wordpress-theme/clinic-contacts/" className="text-white hover:text-cyan-300">Community</a>
                 </li>
               </ul>
             </div>
@@ -73,7 +73,7 @@ const Footer = () => {
       <div className="row">
         <div className="col-md-12">
           <div className="copyright md:text-center text-white">
-            2024 Design - <a href="https://themeforest.net/user/merkulove" className="hover:text-cyan-300">Merkulove </a>WordPress theme - <a href="https://themeforest.net/user/rayoflightt?ref=rayoflightt" className="hover:text-cyan-300">RayoflightThemes</a> © HAVEN - Psychotherapy WordPress Theme
+            2024 Design-© HAVEN@gmail.com
           </div>
         </div>
       </div>
