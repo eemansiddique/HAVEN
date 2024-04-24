@@ -20,6 +20,10 @@ body {
   z-index:99999;
   background: #fff;
   box-shadow: 3px 3px -8px #ddd;
+
+  /* z-index:99999;
+  background: #fff;
+  box-shadow: 3px 3px -8px #ddd; */
 }
 @media only screen and (max-width:768px) {
   .navigation{
