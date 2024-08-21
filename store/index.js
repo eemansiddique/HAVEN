@@ -1,38 +1,29 @@
-// import { configureStore } from '@reduxjs/toolkit';
-// import  userReducer  from './userSlice';
-// const store = configureStore({
-//      reducer: {
-//       user:userReducer
-//     //   auth: authReducer,
-// //       therapistAuth: therapistReducer,
-// //       adminAuth: adminReducer,
-// //       [userApiSlice.reducerPath]: userApiSlice.reducer,
-//      },
-// //     middleware: (getDefaultMiddleware) =>
-// //       getDefaultMiddleware().concat(userApiSlice.middleware),
-// //     devTools: true,
-//    }
-// )
-  
-//   export default store
 
-import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './userSlice';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import { persistReducer, persistStore } from 'redux-persist';
 import adminReducer from './adminSlice'; // Import the admin reducer
-import listUserReducer from'./listUserSlice'
-import listexpertReducer from './listexpertSlice';
-import expertReducer from './expertSlice'
 
-const store = configureStore({
-    reducer: {
-        user: userReducer,
-        admin: adminReducer ,// Add the admin reducer
-       listUser:listUserReducer,
-       expert:listexpertReducer,
-       expert:expertReducer
-    },
-    // Other configurations...
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const rootReducer = combineReducers({
+  admin: adminReducer,
 });
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});
+
+export const persistor = persistStore(store);
 export default store;
+
 

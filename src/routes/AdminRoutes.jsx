@@ -20,16 +20,27 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import AdminLogin from '../pages/Admin/AdminLogin';
 import AdminDashboard from '../pages/Admin/AdminDashboard';
-import AdminUsers from '../pages/Admin/AdminUsers';
-import ExpertLists from '../pages/Admin/ExpertLists';
+import {AdminProtectedRouterAuthentication } from '../pages/Admin/AdminProtectedRouter';
+import NotFound from '../pages/NotFound/NotFound'
+import ListForms from '../pages/Admin/ListForms';
+import FormDetail from '../pages/Admin/FormDetail';
+
+
+
+
 
 function AdminRoutes() {
+ 
   return (
+    
     <Routes>
-      <Route path="/admin/login" element={<AdminLogin />} />
-      <Route path="/admin/dashboard" element={<AdminDashboard />} />
-      <Route path="/admin/users" element={<AdminUsers />} />
-      <Route path="/admin/listExperts" element={<ExpertLists />} />
+      <Route path="/admin/login" element={<AdminProtectedRouterAuthentication><AdminLogin /></AdminProtectedRouterAuthentication>} />
+      <Route path="/admin/dashboard" element={<AdminDashboard/>} />
+      <Route path="/admin/listForms" element={<ListForms/>} />
+      <Route path="/admin/listSingleForm/:id" element={<FormDetail/>} />
+
+      <Route path='*' element={<NotFound />}/>
+
     </Routes>
   );
 }

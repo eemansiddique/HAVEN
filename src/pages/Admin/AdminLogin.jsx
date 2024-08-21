@@ -1,40 +1,71 @@
 
 
-import React, { useState } from 'react';
+
+import React, { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginAdmin } from '../../../store/adminSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [validationError, setValidationError] = useState('');
 
-//   const user = useSelector((state) => state.user);
-//   const { loading, error } = user;
-
-const { loading, error, isAdmin } = useSelector((state) => state.admin); 
-// const admin = useSelector((state) => state.admin); // Select admin state instead of user
-//   const { loading, error } = admin; // Access loading and error from admin state
-
+  const { loading, error } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (error) {
+      console.log("Error:", error); // Log the error to debug
+      if (error === 'Rejected') {
+        toast.error('Password is incorrect. Please try again.');
+      } else {
+        toast.error('An error occurred. Please try again later.');
+      }
+    }
+  }, [error]);
+
+
   const handleLoginEvent = (e) => {
     e.preventDefault();
-    console.log("Login button clicked");
-    let adminCredentials = {
-      email,
-      password
-    };
+
+    // Email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      setValidationError('Please enter a valid email address.');
+      return;
+    }
+
+    // Password validation
+    if (password.length < 8 || !/[A-Z]/.test(password)) {
+      setValidationError('Password must be at least 8 characters long and contain at least one uppercase letter.');
+      return;
+    }
+
+    setValidationError(''); // Clear any existing validation errors
+
+    let adminCredentials = { email, password };
     dispatch(loginAdmin(adminCredentials)).then((result) => {
-      console.log("Login dispatch result:", result);
       if (result.payload) {
-        console.log("Login successful, navigating to admin dashboard");
         setEmail('');
         setPassword('');
         navigate('/admin/dashboard');
       }
-    });
+    }).catch((error) => {
+      toast.error(error);
+    //   console.log(error,'error')
+    //   // Show toast error for incorrect password
+    //   if (error.response && error.response.status === 401) {
+    //     toast.error('Password is incorrect. Please try again.');
+    //   } else {
+    //     // Show generic error message
+    //     toast.error('An error occurred. Please try again later.');
+    //   }
+     }
+    );
   };
 
   return (
@@ -76,8 +107,8 @@ const { loading, error, isAdmin } = useSelector((state) => state.admin);
                 </div>
                 <div className="relative">
                   <button onClick={handleLoginEvent} className="bg-[#26ABA2] text-white rounded-md px-2 py-1">{loading ? 'Loading....' : 'Login'}</button>
-                  {error && (
-                    <div className='alert alert' role='alert'>{error}</div>
+                  {validationError && (
+                    <div className='alert alert-error text-red-500 mt-2' role='alert'>{validationError}</div>
                   )}
                 </div>             
                 <div className="text-gray-600 text-center">
@@ -91,6 +122,7 @@ const { loading, error, isAdmin } = useSelector((state) => state.admin);
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

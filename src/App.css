@@ -53,3 +53,27 @@ body {
     display: block;
   }
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.pagination li {
+  list-style-type: none;
+  margin: 0 0.5rem;
+}
+
+.pagination li a {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  color: #26ABA2;
+}
+
+.pagination li.active a {
+  background-color: #26ABA2;
+  color: white;
+}
+

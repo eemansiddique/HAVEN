@@ -8,16 +8,21 @@ const LOGOUT_ADMIN = 'admin/logoutAdmin'; // Define logout action type
 // Async thunk to login admin
 export const loginAdmin = createAsyncThunk(
     LOGIN_ADMIN,
-    async (adminCredentials) => {
+    async (adminCredentials,{ rejectWithValue }) => {
         try {
-            const response = await axios.post('http://localhost:8000/admin/login', adminCredentials);
+            const response = await axios.post('http://localhost:3000/admin/login', adminCredentials);
             localStorage.setItem('admin', JSON.stringify(response.data));
             return response.data;
         } catch (error) {
-            throw error;
+            if (error.response && error.response.status === 401) {
+                return rejectWithValue('Password is incorrect. Please try again.');
+            } else {
+                return rejectWithValue('An error occurred. Please try again later.');
+            }
         }
     }
 );
+      
 
 // Async thunk to logout admin
 export const logoutAdmin = createAsyncThunk(
@@ -74,3 +79,4 @@ const adminSlice = createSlice({
 });
 
 export default adminSlice.reducer;
+

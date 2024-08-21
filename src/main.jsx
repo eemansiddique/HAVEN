@@ -1,57 +1,26 @@
-// import React from 'react'
-// import ReactDOM from 'react-dom/client'
-// import App from './App'
-// import './index.css'
-// import { BrowserRouter } from 'react-router-dom'
-// import { Provider } from 'react-redux'
-//  import store from '../store/index.js'
-
-
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   <Provider  store={store}>
-  
-//     <BrowserRouter>
-//     <React.StrictMode>
-//     <App />
-//     </React.StrictMode>
-//     </BrowserRouter>
-   
- 
-//   </Provider>
-// )
 
 import React from 'react';
-import ReactDOM from 'react-dom'; // Correct import statement
+import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from '../store/index.js';
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { persistor } from '../store/index.js'; // Adjust the import path
+import { createRoot } from 'react-dom/client';
 
-ReactDOM.render(
+
+
+
+
+createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <BrowserRouter>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </BrowserRouter>
+    </PersistGate>
+  </Provider>
 );
-
-// import React from 'react';
-// import ReactDOM from 'react-dom/client';
-// import App from './App';
-// import './index.css';
-// import { Provider } from 'react-redux';
-// import store from '../store/index.js';
-
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   <Provider store={store}>
-//     <React.StrictMode>
-  
-//       <App />
-   
-//     </React.StrictMode>
-//   </Provider>
-// );
